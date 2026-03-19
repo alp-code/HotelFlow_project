@@ -1,0 +1,82 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+  html {
+    font-family: 'DM Sans', system-ui, sans-serif;
+  }
+  body {
+    background-color: #F8F3EC;
+    color: #1A2744;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  h1, h2, h3, h4, h5 {
+    font-family: 'Playfair Display', Georgia, serif;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-hotel-gold text-white font-body font-semibold px-5 py-2.5 rounded-lg
+           hover:bg-hotel-gold-light transition-all duration-200 
+           disabled:opacity-50 disabled:cursor-not-allowed shadow-sm text-sm;
+  }
+  .btn-secondary {
+    @apply bg-white text-hotel-navy font-body font-semibold px-5 py-2.5 rounded-lg
+           border border-hotel-border hover:bg-hotel-cream transition-all duration-200
+           disabled:opacity-50 disabled:cursor-not-allowed text-sm;
+  }
+  .btn-danger {
+    @apply bg-red-600 text-white font-body font-semibold px-5 py-2.5 rounded-lg
+           hover:bg-red-700 transition-all duration-200 
+           disabled:opacity-50 disabled:cursor-not-allowed text-sm;
+  }
+  .btn-ghost {
+    @apply text-hotel-slate font-body font-medium px-4 py-2 rounded-lg
+           hover:bg-hotel-border transition-all duration-200 text-sm;
+  }
+  .input-field {
+    @apply w-full px-4 py-2.5 rounded-lg border border-hotel-border 
+           bg-white text-hotel-navy font-body text-sm
+           focus:outline-none focus:ring-2 focus:ring-hotel-gold focus:border-transparent
+           placeholder:text-hotel-muted transition-all duration-200;
+  }
+  .card {
+    @apply bg-white rounded-2xl shadow-card border border-hotel-border/50 p-6;
+  }
+  .badge {
+    @apply inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold;
+  }
+  .table-header {
+    @apply bg-hotel-cream/80 text-hotel-slate text-xs font-semibold uppercase tracking-wider px-4 py-3;
+  }
+  .table-cell {
+    @apply px-4 py-3.5 text-sm text-hotel-slate border-b border-hotel-border/50;
+  }
+}
+
+/* Smooth page transitions */
+.page-enter {
+  animation: fadeSlideIn 0.25s ease-out;
+}
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Sidebar active state glow */
+.sidebar-active {
+  background: linear-gradient(135deg, rgba(200,149,42,0.15) 0%, rgba(200,149,42,0.08) 100%);
+  border-left: 3px solid #C8952A;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #D1C9BE; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #B5A99A; }
