@@ -1,42 +1,36 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\vmtic\\OneDrive\\Documents\\HotelFlow_project\\HotelFlow\\HotelFlow.API\\HotelFlow.API.csproj": {}
+    "D:\\softversko\\HotelFlow_project\\HotelFlow.API\\HotelFlow.API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\vmtic\\OneDrive\\Documents\\HotelFlow_project\\HotelFlow\\HotelFlow.API\\HotelFlow.API.csproj": {
+    "D:\\softversko\\HotelFlow_project\\HotelFlow.API\\HotelFlow.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\vmtic\\OneDrive\\Documents\\HotelFlow_project\\HotelFlow\\HotelFlow.API\\HotelFlow.API.csproj",
+        "projectUniqueName": "D:\\softversko\\HotelFlow_project\\HotelFlow.API\\HotelFlow.API.csproj",
         "projectName": "HotelFlow.API",
-        "projectPath": "C:\\Users\\vmtic\\OneDrive\\Documents\\HotelFlow_project\\HotelFlow\\HotelFlow.API\\HotelFlow.API.csproj",
-        "packagesPath": "C:\\Users\\vmtic\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\vmtic\\OneDrive\\Documents\\HotelFlow_project\\HotelFlow\\HotelFlow.API\\obj\\",
+        "projectPath": "D:\\softversko\\HotelFlow_project\\HotelFlow.API\\HotelFlow.API.csproj",
+        "packagesPath": "C:\\Users\\Korisnik\\.nuget\\packages\\",
+        "outputPath": "D:\\softversko\\HotelFlow_project\\HotelFlow.API\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\vmtic\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\Korisnik\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net10.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net10.0": {
             "targetAlias": "net10.0",
             "projectReferences": {
-              "C:\\Users\\vmtic\\OneDrive\\Documents\\HotelFlow_project\\HotelFlow\\HotelFlow.Application\\HotelFlow.Application.csproj": {
-                "projectPath": "C:\\Users\\vmtic\\OneDrive\\Documents\\HotelFlow_project\\HotelFlow\\HotelFlow.Application\\HotelFlow.Application.csproj"
+              "D:\\softversko\\HotelFlow_project\\HotelFlow.Application\\HotelFlow.Application.csproj": {
+                "projectPath": "D:\\softversko\\HotelFlow_project\\HotelFlow.Application\\HotelFlow.Application.csproj"
               },
-              "C:\\Users\\vmtic\\OneDrive\\Documents\\HotelFlow_project\\HotelFlow\\HotelFlow.Infrastructure\\HotelFlow.Infrastructure.csproj": {
-                "projectPath": "C:\\Users\\vmtic\\OneDrive\\Documents\\HotelFlow_project\\HotelFlow\\HotelFlow.Infrastructure\\HotelFlow.Infrastructure.csproj"
+              "D:\\softversko\\HotelFlow_project\\HotelFlow.Infrastructure\\HotelFlow.Infrastructure.csproj": {
+                "projectPath": "D:\\softversko\\HotelFlow_project\\HotelFlow.Infrastructure\\HotelFlow.Infrastructure.csproj"
               }
             }
           }
@@ -51,7 +45,7 @@
           "auditLevel": "low",
           "auditMode": "all"
         },
-        "SdkAnalysisLevel": "10.0.100"
+        "SdkAnalysisLevel": "10.0.200"
       },
       "frameworks": {
         "net10.0": {
@@ -121,7 +115,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.102/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.201/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.AspNetCore": "(,10.0.32767]",
             "Microsoft.AspNetCore.Antiforgery": "(,10.0.32767]",
@@ -539,39 +533,33 @@
         }
       }
     },
-    "C:\\Users\\vmtic\\OneDrive\\Documents\\HotelFlow_project\\HotelFlow\\HotelFlow.Application\\HotelFlow.Application.csproj": {
+    "D:\\softversko\\HotelFlow_project\\HotelFlow.Application\\HotelFlow.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\vmtic\\OneDrive\\Documents\\HotelFlow_project\\HotelFlow\\HotelFlow.Application\\HotelFlow.Application.csproj",
+        "projectUniqueName": "D:\\softversko\\HotelFlow_project\\HotelFlow.Application\\HotelFlow.Application.csproj",
         "projectName": "HotelFlow.Application",
-        "projectPath": "C:\\Users\\vmtic\\OneDrive\\Documents\\HotelFlow_project\\HotelFlow\\HotelFlow.Application\\HotelFlow.Application.csproj",
-        "packagesPath": "C:\\Users\\vmtic\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\vmtic\\OneDrive\\Documents\\HotelFlow_project\\HotelFlow\\HotelFlow.Application\\obj\\",
+        "projectPath": "D:\\softversko\\HotelFlow_project\\HotelFlow.Application\\HotelFlow.Application.csproj",
+        "packagesPath": "C:\\Users\\Korisnik\\.nuget\\packages\\",
+        "outputPath": "D:\\softversko\\HotelFlow_project\\HotelFlow.Application\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\vmtic\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\Korisnik\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net10.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net10.0": {
             "targetAlias": "net10.0",
             "projectReferences": {
-              "C:\\Users\\vmtic\\OneDrive\\Documents\\HotelFlow_project\\HotelFlow\\HotelFlow.Domain\\HotelFlow.Domain.csproj": {
-                "projectPath": "C:\\Users\\vmtic\\OneDrive\\Documents\\HotelFlow_project\\HotelFlow\\HotelFlow.Domain\\HotelFlow.Domain.csproj"
+              "D:\\softversko\\HotelFlow_project\\HotelFlow.Domain\\HotelFlow.Domain.csproj": {
+                "projectPath": "D:\\softversko\\HotelFlow_project\\HotelFlow.Domain\\HotelFlow.Domain.csproj"
               },
-              "C:\\Users\\vmtic\\OneDrive\\Documents\\HotelFlow_project\\HotelFlow\\HotelFlow.Infrastructure\\HotelFlow.Infrastructure.csproj": {
-                "projectPath": "C:\\Users\\vmtic\\OneDrive\\Documents\\HotelFlow_project\\HotelFlow\\HotelFlow.Infrastructure\\HotelFlow.Infrastructure.csproj"
+              "D:\\softversko\\HotelFlow_project\\HotelFlow.Infrastructure\\HotelFlow.Infrastructure.csproj": {
+                "projectPath": "D:\\softversko\\HotelFlow_project\\HotelFlow.Infrastructure\\HotelFlow.Infrastructure.csproj"
               }
             }
           }
@@ -586,7 +574,7 @@
           "auditLevel": "low",
           "auditMode": "all"
         },
-        "SdkAnalysisLevel": "10.0.100"
+        "SdkAnalysisLevel": "10.0.200"
       },
       "frameworks": {
         "net10.0": {
@@ -629,7 +617,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.102/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.201/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.CSharp": "(,4.7.32767]",
             "Microsoft.VisualBasic": "(,10.4.32767]",
@@ -907,28 +895,22 @@
         }
       }
     },
-    "C:\\Users\\vmtic\\OneDrive\\Documents\\HotelFlow_project\\HotelFlow\\HotelFlow.Domain\\HotelFlow.Domain.csproj": {
+    "D:\\softversko\\HotelFlow_project\\HotelFlow.Domain\\HotelFlow.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\vmtic\\OneDrive\\Documents\\HotelFlow_project\\HotelFlow\\HotelFlow.Domain\\HotelFlow.Domain.csproj",
+        "projectUniqueName": "D:\\softversko\\HotelFlow_project\\HotelFlow.Domain\\HotelFlow.Domain.csproj",
         "projectName": "HotelFlow.Domain",
-        "projectPath": "C:\\Users\\vmtic\\OneDrive\\Documents\\HotelFlow_project\\HotelFlow\\HotelFlow.Domain\\HotelFlow.Domain.csproj",
-        "packagesPath": "C:\\Users\\vmtic\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\vmtic\\OneDrive\\Documents\\HotelFlow_project\\HotelFlow\\HotelFlow.Domain\\obj\\",
+        "projectPath": "D:\\softversko\\HotelFlow_project\\HotelFlow.Domain\\HotelFlow.Domain.csproj",
+        "packagesPath": "C:\\Users\\Korisnik\\.nuget\\packages\\",
+        "outputPath": "D:\\softversko\\HotelFlow_project\\HotelFlow.Domain\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\vmtic\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\Korisnik\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net10.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -947,7 +929,7 @@
           "auditLevel": "low",
           "auditMode": "all"
         },
-        "SdkAnalysisLevel": "10.0.100"
+        "SdkAnalysisLevel": "10.0.200"
       },
       "frameworks": {
         "net10.0": {
@@ -974,7 +956,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.102/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.201/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.CSharp": "(,4.7.32767]",
             "Microsoft.VisualBasic": "(,10.4.32767]",
@@ -1252,36 +1234,30 @@
         }
       }
     },
-    "C:\\Users\\vmtic\\OneDrive\\Documents\\HotelFlow_project\\HotelFlow\\HotelFlow.Infrastructure\\HotelFlow.Infrastructure.csproj": {
+    "D:\\softversko\\HotelFlow_project\\HotelFlow.Infrastructure\\HotelFlow.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\vmtic\\OneDrive\\Documents\\HotelFlow_project\\HotelFlow\\HotelFlow.Infrastructure\\HotelFlow.Infrastructure.csproj",
+        "projectUniqueName": "D:\\softversko\\HotelFlow_project\\HotelFlow.Infrastructure\\HotelFlow.Infrastructure.csproj",
         "projectName": "HotelFlow.Infrastructure",
-        "projectPath": "C:\\Users\\vmtic\\OneDrive\\Documents\\HotelFlow_project\\HotelFlow\\HotelFlow.Infrastructure\\HotelFlow.Infrastructure.csproj",
-        "packagesPath": "C:\\Users\\vmtic\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\vmtic\\OneDrive\\Documents\\HotelFlow_project\\HotelFlow\\HotelFlow.Infrastructure\\obj\\",
+        "projectPath": "D:\\softversko\\HotelFlow_project\\HotelFlow.Infrastructure\\HotelFlow.Infrastructure.csproj",
+        "packagesPath": "C:\\Users\\Korisnik\\.nuget\\packages\\",
+        "outputPath": "D:\\softversko\\HotelFlow_project\\HotelFlow.Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\vmtic\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\Korisnik\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net10.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net10.0": {
             "targetAlias": "net10.0",
             "projectReferences": {
-              "C:\\Users\\vmtic\\OneDrive\\Documents\\HotelFlow_project\\HotelFlow\\HotelFlow.Domain\\HotelFlow.Domain.csproj": {
-                "projectPath": "C:\\Users\\vmtic\\OneDrive\\Documents\\HotelFlow_project\\HotelFlow\\HotelFlow.Domain\\HotelFlow.Domain.csproj"
+              "D:\\softversko\\HotelFlow_project\\HotelFlow.Domain\\HotelFlow.Domain.csproj": {
+                "projectPath": "D:\\softversko\\HotelFlow_project\\HotelFlow.Domain\\HotelFlow.Domain.csproj"
               }
             }
           }
@@ -1296,7 +1272,7 @@
           "auditLevel": "low",
           "auditMode": "all"
         },
-        "SdkAnalysisLevel": "10.0.100"
+        "SdkAnalysisLevel": "10.0.200"
       },
       "frameworks": {
         "net10.0": {
@@ -1339,7 +1315,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.102/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.201/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.CSharp": "(,4.7.32767]",
             "Microsoft.VisualBasic": "(,10.4.32767]",

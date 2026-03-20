@@ -8,6 +8,13 @@ import {
 } from '../../components/ui';
 import { format } from 'date-fns';
 
+const safeFormat = (date: string | undefined | null, fmt: string) => {
+  if (!date) return '—';
+  const d = new Date(date);
+  if (isNaN(d.getTime())) return '—';
+  return format(d, fmt);
+};
+
 export default function GuestReservations() {
   const [reservations, setReservations] = useState<Reservation[]>([]);
   const [loading, setLoading] = useState(true);
@@ -66,12 +73,9 @@ export default function GuestReservations() {
                       <span className="text-hotel-muted font-normal ml-1.5">({r.roomType})</span>
                     </p>
                     <p className="text-hotel-muted text-sm font-body mt-0.5">
-                      {format(new Date(r.checkInDate), 'MMM d')} → {format(new Date(r.checkOutDate), 'MMM d, yyyy')}
-                      <span className="mx-1.5 text-hotel-border">·</span>
-                      {r.nights} night{r.nights !== 1 ? 's' : ''}
-                      <span className="mx-1.5 text-hotel-border">·</span>
-                      {r.numberOfGuests} guest{r.numberOfGuests !== 1 ? 's' : ''}
-                    </p>
+                      {safeFormat(r.checkInDate, 'MMM d')} → {safeFormat(r.checkOutDate, 'MMM d, yyyy')}
+                      {(() => { const n = Math.round((new Date(r.checkOutDate).getTime() - new Date(r.checkInDate).getTime()) / 86400000); return n > 0 ? <><span className="mx-1.5 text-hotel-border">·</span>{n} night{n !== 1 ? 's' : ''}</> : null; })()}
+                      {(r.numberOfGuests ?? 0) > 0 && <><span className="mx-1.5 text-hotel-border">·</span>{r.numberOfGuests} guest{r.numberOfGuests !== 1 ? 's' : ''}</>}                    </p>
                     {r.specialRequests && (
                       <p className="text-hotel-muted text-xs font-body mt-1 italic">"{r.specialRequests}"</p>
                     )}
@@ -79,7 +83,7 @@ export default function GuestReservations() {
                 </div>
                 <div className="flex flex-col items-end gap-2">
                   <ReservationStatusBadge status={r.status} />
-                  <p className="font-display text-hotel-navy text-lg">${r.totalPrice.toFixed(2)}</p>
+                  <p className="font-display text-hotel-navy text-lg">${r.totalPrice?.toFixed(2) ?? '—'}</p>
                   {r.isPaid && <span className="badge bg-emerald-100 text-emerald-700 text-xs">Paid</span>}
                 </div>
               </div>
@@ -106,14 +110,14 @@ export default function GuestReservations() {
             {[
               ['Reservation ID', selected.id.slice(0, 8) + '…'],
               ['Room', `${selected.roomNumber} (${selected.roomType})`],
-              ['Check-in', format(new Date(selected.checkInDate), 'MMMM d, yyyy')],
-              ['Check-out', format(new Date(selected.checkOutDate), 'MMMM d, yyyy')],
-              ['Duration', `${selected.nights} night${selected.nights !== 1 ? 's' : ''}`],
-              ['Guests', selected.numberOfGuests],
-              ['Total Price', `$${selected.totalPrice.toFixed(2)}`],
+              ['Check-in', safeFormat(selected.checkInDate, 'MMMM d, yyyy')],
+              ['Check-out', safeFormat(selected.checkOutDate, 'MMMM d, yyyy')],
+              ['Duration', (() => { const n = Math.round((new Date(selected.checkOutDate).getTime() - new Date(selected.checkInDate).getTime()) / 86400000); return `${n} night${n !== 1 ? 's' : ''}`; })()],
+              ['Guests', selected.numberOfGuests || '—'],
+              ['Total Price', `$${selected.totalPrice?.toFixed(2) ?? '—'}`],
               ['Payment', selected.isPaid ? 'Paid' : 'Pending'],
               ['Status', selected.status],
-              ['Booked on', format(new Date(selected.createdAt), 'MMM d, yyyy')],
+              ['Booked on', safeFormat(selected.createdAt, 'MMM d, yyyy')],
             ].map(([k, v]) => (
               <div key={String(k)} className="flex justify-between py-2 border-b border-hotel-border/50 text-sm font-body">
                 <span className="text-hotel-muted">{k}</span>
@@ -137,7 +141,7 @@ export default function GuestReservations() {
           Are you sure you want to cancel your reservation for{' '}
           <strong>Room {cancelConfirm?.roomNumber}</strong>{' '}
           on{' '}
-          <strong>{cancelConfirm && format(new Date(cancelConfirm.checkInDate), 'MMM d, yyyy')}</strong>?
+          <strong>{safeFormat(cancelConfirm?.checkInDate, 'MMM d, yyyy')}</strong>?
           This action cannot be undone.
         </p>
         <div className="flex gap-3">

@@ -20,3 +20,15 @@ C:\Users\vmtic\OneDrive\Documents\HotelFlow_project\HotelFlow\HotelFlow.Domain\o
 C:\Users\vmtic\OneDrive\Documents\HotelFlow_project\HotelFlow\HotelFlow.Domain\obj\Debug\net10.0\refint\HotelFlow.Domain.dll
 C:\Users\vmtic\OneDrive\Documents\HotelFlow_project\HotelFlow\HotelFlow.Domain\obj\Debug\net10.0\HotelFlow.Domain.pdb
 C:\Users\vmtic\OneDrive\Documents\HotelFlow_project\HotelFlow\HotelFlow.Domain\obj\Debug\net10.0\ref\HotelFlow.Domain.dll
+D:\softversko\HotelFlow_project\HotelFlow.Domain\bin\Debug\net10.0\HotelFlow.Domain.deps.json
+D:\softversko\HotelFlow_project\HotelFlow.Domain\bin\Debug\net10.0\HotelFlow.Domain.dll
+D:\softversko\HotelFlow_project\HotelFlow.Domain\bin\Debug\net10.0\HotelFlow.Domain.pdb
+D:\softversko\HotelFlow_project\HotelFlow.Domain\obj\Debug\net10.0\HotelFlow.Domain.GeneratedMSBuildEditorConfig.editorconfig
+D:\softversko\HotelFlow_project\HotelFlow.Domain\obj\Debug\net10.0\HotelFlow.Domain.AssemblyInfoInputs.cache
+D:\softversko\HotelFlow_project\HotelFlow.Domain\obj\Debug\net10.0\HotelFlow.Domain.AssemblyInfo.cs
+D:\softversko\HotelFlow_project\HotelFlow.Domain\obj\Debug\net10.0\HotelFlow.Domain.csproj.CoreCompileInputs.cache
+D:\softversko\HotelFlow_project\HotelFlow.Domain\obj\Debug\net10.0\HotelFlow.Domain.sourcelink.json
+D:\softversko\HotelFlow_project\HotelFlow.Domain\obj\Debug\net10.0\HotelFlow.Domain.dll
+D:\softversko\HotelFlow_project\HotelFlow.Domain\obj\Debug\net10.0\refint\HotelFlow.Domain.dll
+D:\softversko\HotelFlow_project\HotelFlow.Domain\obj\Debug\net10.0\HotelFlow.Domain.pdb
+D:\softversko\HotelFlow_project\HotelFlow.Domain\obj\Debug\net10.0\ref\HotelFlow.Domain.dll

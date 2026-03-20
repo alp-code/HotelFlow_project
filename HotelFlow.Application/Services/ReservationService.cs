@@ -351,12 +351,16 @@ public class ReservationService : IReservationService
             .OrderByDescending(r => r.CreatedAt)
             .Select(r => new ReservationSummary
             {
-                Id = r.Id,
+                 Id = r.Id,
                 RoomNumber = r.Room.RoomNumber,
+                RoomType = r.Room.RoomType.Name,
                 CheckInDate = r.CheckInDate,
                 CheckOutDate = r.CheckOutDate,
+                NumberOfGuests = r.NumberOfGuests,
                 Status = r.Status.ToString(),
-                TotalPrice = r.TotalPrice
+                TotalPrice = r.TotalPrice,
+                IsPaid = r.IsPaid,
+                CreatedAt = r.CreatedAt
             })
             .ToListAsync();
     }

@@ -72,33 +72,32 @@ export type ReservationStatus = 'Confirmed' | 'CheckedIn' | 'CheckedOut' | 'Canc
 
 export interface Reservation {
   id: string;
-  guestId: string;
-  guestEmail: string;
-  guestName: string;
-  roomId: string;
   roomNumber: string;
-  roomType: string;
   checkInDate: string;
   checkOutDate: string;
-  numberOfGuests: number;
   status: ReservationStatus;
-  specialRequests?: string;
   totalPrice: number;
-  isPaid: boolean;
-  nights: number;
-  createdAt: string;
+  guestId?: string;
+  guestEmail?: string;
+  guestName?: string;
+  roomId?: string;
+  roomType?: string;
+  numberOfGuests?: number;
+  specialRequests?: string;
+  isPaid?: boolean;
+  nights?: number;
+  createdAt?: string;
   checkedInAt?: string;
   checkedOutAt?: string;
 }
 
 export interface AvailableRoom {
-  id: string;
+  roomId: string;
   roomNumber: string;
   roomType: string;
   pricePerNight: number;
   maxGuests: number;
-  totalPrice: number;
-  nights: number;
+  description: string;
 }
 
 export interface CreateReservationRequest {

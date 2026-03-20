@@ -151,15 +151,22 @@ export default function GuestRooms() {
             </p>
           )}
 
-          {availableRooms.map((room) => (
-            <div key={room.id} className="flex items-center justify-between p-4 rounded-xl bg-hotel-cream border border-hotel-border">
+        {availableRooms.map((room) => {
+          const nights = Math.max(1, Math.round(
+            (new Date(form.checkOut).getTime() - new Date(form.checkIn).getTime()) / 86400000
+          ));
+          const totalPrice = room.pricePerNight * nights;
+          return (
+            <div key={room.roomId} className="flex items-center justify-between p-4 rounded-xl bg-hotel-cream border border-hotel-border">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-xl bg-hotel-gold/10 flex items-center justify-center">
                   <BedDouble size={18} className="text-hotel-gold" />
                 </div>
                 <div>
                   <p className="font-body font-semibold text-hotel-navy text-sm">Room {room.roomNumber}</p>
-                  <p className="text-hotel-muted text-xs font-body">{room.nights} night{room.nights !== 1 ? 's' : ''} · ${room.totalPrice.toFixed(2)} total</p>
+                  <p className="text-hotel-muted text-xs font-body">
+                    {nights} night{nights !== 1 ? 's' : ''} · ${totalPrice.toFixed(2)} total · ${room.pricePerNight}/night
+                  </p>
                 </div>
               </div>
               <button className="btn-primary py-1.5 px-4"
@@ -167,7 +174,8 @@ export default function GuestRooms() {
                 Book
               </button>
             </div>
-          ))}
+          );
+        })}
         </div>
       </Modal>
 
@@ -183,8 +191,7 @@ export default function GuestRooms() {
                 ['Check-in', format(new Date(form.checkIn), 'MMMM d, yyyy')],
                 ['Check-out', format(new Date(form.checkOut), 'MMMM d, yyyy')],
                 ['Guests', form.guests],
-                ['Total', `$${selectedRoom.totalPrice.toFixed(2)}`],
-              ].map(([k, v]) => (
+                ['Total', `$${(selectedRoom.pricePerNight * Math.max(1, Math.round((new Date(form.checkOut).getTime() - new Date(form.checkIn).getTime()) / 86400000))).toFixed(2)}`],              ].map(([k, v]) => (
                 <div key={String(k)} className="flex justify-between text-sm font-body">
                   <span className="text-hotel-muted">{k}</span>
                   <span className="font-semibold text-hotel-navy">{v}</span>
