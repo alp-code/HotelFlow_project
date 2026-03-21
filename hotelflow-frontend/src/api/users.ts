@@ -6,7 +6,7 @@ export const usersApi = {
   deleteUser: (userId: string) => api.delete(`/api/users/${userId}`),
   restoreUser: (userId: string) => api.post(`/api/users/${userId}/restore`),
   changeRole: (userId: string, newRole: string) =>
-    api.put('/api/users/change-role', { userId, newRole }),
+    api.put('/api/users/change-role', { userId, role: newRole }),
   getUserIdByEmail: (email: string) =>
     api.get('/api/users/user-id', { params: { email } }).then((r) => r.data),
 };
