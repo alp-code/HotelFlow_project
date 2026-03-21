@@ -10,11 +10,13 @@ import {
 type Tab = 'rooms' | 'types';
 
 const statusOptions = [
-  { label: 'Available', value: 1 },
-  { label: 'Occupied', value: 2 },
-  { label: 'Needs Cleaning', value: 3 },
-  { label: 'Out of Service', value: 4 },
+  { label: 'Available', value: 'Available' },
+  { label: 'Occupied', value: 'Occupied' },
+  { label: 'Needs Cleaning', value: 'NeedsCleaning' },
+  { label: 'Out of Service', value: 'OutOfService' },
+  { label: 'Cleaning', value: 'Cleaning' },
 ];
+
 
 export default function StaffRooms() {
   const [tab, setTab] = useState<Tab>('rooms');
@@ -25,7 +27,7 @@ export default function StaffRooms() {
   // Room form
   const [roomModal, setRoomModal] = useState(false);
   const [editRoom, setEditRoom] = useState<Room | null>(null);
-  const [roomForm, setRoomForm] = useState({ roomNumber: '', roomTypeId: '', status: 1 });
+  const [roomForm, setRoomForm] = useState({ roomNumber: '', roomTypeId: '', status: 'Available' });
   const [roomError, setRoomError] = useState('');
   const [roomSaving, setRoomSaving] = useState(false);
 
@@ -47,14 +49,14 @@ export default function StaffRooms() {
   // ── Rooms ──
   const openCreateRoom = () => {
     setEditRoom(null);
-    setRoomForm({ roomNumber: '', roomTypeId: roomTypes[0]?.id ?? '', status: 1 });
+    setRoomForm({ roomNumber: '', roomTypeId: roomTypes[0]?.id ?? '', status: 'Available' });
     setRoomError('');
     setRoomModal(true);
   };
   const openEditRoom = (r: Room) => {
     setEditRoom(r);
     const statusVal = statusOptions.find((s) => s.label.replace(' ', '') === r.status.replace(' ', ''))?.value ?? 1;
-    setRoomForm({ roomNumber: r.roomNumber, roomTypeId: '', status: statusVal });
+    setRoomForm({ roomNumber: r.roomNumber, roomTypeId: '', status: r.status });
     setRoomError('');
     setRoomModal(true);
   };
@@ -231,7 +233,7 @@ export default function StaffRooms() {
           )}
           {editRoom && (
             <FormField label="Status">
-              <select className="input-field" value={roomForm.status} onChange={(e) => setRoomForm((f) => ({ ...f, status: +e.target.value }))}>
+              <select className="input-field" value={roomForm.status} onChange={(e) => setRoomForm((f) => ({ ...f, status: e.target.value }))}>
                 {statusOptions.map((s) => <option key={s.value} value={s.value}>{s.label}</option>)}
               </select>
             </FormField>

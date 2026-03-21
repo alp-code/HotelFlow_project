@@ -57,7 +57,7 @@ export interface CreateRoomRequest {
 
 export interface UpdateRoomRequest {
   roomNumber: string;
-  status: number;
+  status: string;
 }
 
 export interface CreateRoomTypeRequest {

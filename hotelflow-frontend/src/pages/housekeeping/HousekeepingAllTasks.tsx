@@ -43,11 +43,20 @@ export default function HousekeepingAllTasks() {
   const load = () => {
     setLoading(true);
     Promise.all([
-      housekeepingApi.getAllTasks(),
+      isStaff
+        ? housekeepingApi.getAllTasks()
+        : Promise.all([
+            housekeepingApi.getMyTasks(),
+            housekeepingApi.getAvailableTasks(),
+            housekeepingApi.getTodayTasks(),
+          ]).then(([mine, available, today]) => {
+            const combined = [...mine, ...available, ...today];
+            return combined.filter((t, i, self) => self.findIndex(x => x.id === t.id) === i);
+          }),
       isStaff ? roomsApi.getAll() : Promise.resolve([] as Room[]),
     ]).then(([t, r]) => {
-      setTasks(t);
-      setRooms(r);
+      setTasks(t as HousekeepingTask[]);
+      setRooms(r as Room[]);
     }).finally(() => setLoading(false));
   };
   useEffect(load, []);

@@ -13,8 +13,20 @@ export default function StaffCheckouts() {
   const [actionId, setActionId] = useState<string | null>(null);
 
   const load = () => {
-    setLoading(true);
-    reservationsApi.getTodayCheckouts().then(setCheckouts).finally(() => setLoading(false));
+  setLoading(true);
+  Promise.all([
+    reservationsApi.getTodayCheckouts(),
+    reservationsApi.getAll().catch(() => [] as Reservation[]),
+  ]).then(([pending, all]) => {
+    const todayCheckedOut = all.filter(
+      (r) => r.status === 'CheckedOut' &&
+      r.checkedOutAt &&
+      new Date(r.checkedOutAt).toDateString() === new Date().toDateString()
+    );
+    const combined = [...pending, ...todayCheckedOut];
+    const unique = combined.filter((r, i, self) => self.findIndex(x => x.id === r.id) === i);
+    setCheckouts(unique);
+    }).finally(() => setLoading(false));
   };
 
   useEffect(load, []);
@@ -31,7 +43,7 @@ export default function StaffCheckouts() {
 
   const filtered = checkouts.filter((r) => {
     const q = search.toLowerCase();
-    return r.guestName.toLowerCase().includes(q) || r.guestEmail.toLowerCase().includes(q) || r.roomNumber.toLowerCase().includes(q);
+    return (r.guestName ?? '').toLowerCase().includes(q) || (r.guestEmail ?? '').toLowerCase().includes(q) || r.roomNumber.toLowerCase().includes(q);
   });
 
   if (loading) return <PageSpinner />;

@@ -18,12 +18,21 @@ export default function StaffDashboard() {
 
   const load = async () => {
     setLoading(true);
-    const [a, c] = await Promise.all([
+    const [a, c, allRes] = await Promise.all([
       reservationsApi.getAll(today).catch(() => [] as Reservation[]),
       reservationsApi.getTodayCheckouts().catch(() => [] as Reservation[]),
+      reservationsApi.getAll().catch(() => [] as Reservation[]),
     ]);
     setAll(a);
-    setCheckouts(c);
+    const checkedOutToday = allRes.filter(
+      (r) => r.status === 'CheckedOut' &&
+      r.checkedOutAt &&
+      new Date(r.checkedOutAt).toDateString() === new Date().toDateString()
+    );
+    const combined = [...c, ...checkedOutToday].filter(
+      (r, i, self) => self.findIndex(x => x.id === r.id) === i
+    );
+    setCheckouts(combined);
     setLoading(false);
   };
 

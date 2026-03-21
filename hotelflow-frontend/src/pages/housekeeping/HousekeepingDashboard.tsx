@@ -13,9 +13,15 @@ export default function HousekeepingDashboard() {
   useEffect(() => {
     Promise.all([
       housekeepingApi.getTodayTasks(),
+      housekeepingApi.getAvailableTasks(),
+      housekeepingApi.getMyTasks(),
       housekeepingApi.getMyInfo(true).catch(() => null),
-    ]).then(([t, me]) => {
-      setTasks(t);
+    ]).then(([todayTasks, available, myTasks, me]) => {
+      const combined = [...todayTasks, ...available.filter(t => new Date(t.deadline).toDateString() === new Date().toDateString()),
+      ...myTasks,
+      ];
+      const unique = combined.filter((t, i, self) => self.findIndex(x => x.id === t.id) === i);
+      setTasks(unique);
       setMyInfo(me);
     }).finally(() => setLoading(false));
   }, []);

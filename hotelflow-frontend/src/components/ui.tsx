@@ -6,6 +6,7 @@ const roomStatusColors: Record<string, string> = {
   Occupied: 'bg-blue-100 text-blue-800',
   NeedsCleaning: 'bg-amber-100 text-amber-800',
   OutOfService: 'bg-red-100 text-red-700',
+  Cleaning: 'bg-cyan-100 text-cyan-800',
 };
 
 const reservationStatusColors: Record<string, string> = {
@@ -35,7 +36,7 @@ const taskTypeColors: Record<string, string> = {
 export function RoomStatusBadge({ status }: { status: string }) {
   return (
     <span className={`badge ${roomStatusColors[status] ?? 'bg-gray-100 text-gray-600'}`}>
-      {status === 'NeedsCleaning' ? 'Needs Cleaning' : status}
+      {status === 'NeedsCleaning' ? 'Needs Cleaning' : status === 'Cleaning' ? 'Cleaning' : status}
     </span>
   );
 }

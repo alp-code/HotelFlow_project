@@ -9,5 +9,6 @@ public enum RoomStatus
     Available = 1,
     Occupied = 2,
     NeedsCleaning = 3,
-    OutOfService = 4 
+    OutOfService = 4,
+    Cleaning = 5
 }

@@ -123,6 +123,7 @@ public class HousekeepingService : IHousekeepingService
 
         task.Reassign(housekeeperId);
         task.Start();
+        task.Room.ChangeStatus(RoomStatus.Cleaning);
         await _context.SaveChangesAsync();
 
         _logger.LogInformation($"Task {taskId} taken by housekeeper {housekeeperId}");
@@ -136,9 +137,7 @@ public class HousekeepingService : IHousekeepingService
             .Include(t => t.Room)
             .ThenInclude(r => r.RoomType)
             .Include(t => t.AssignedToUser)
-            .Where(t => t.AssignedToUserId == housekeeperId &&
-                       t.Status != HousekeepingTaskStatus.Completed &&
-                       t.Status != HousekeepingTaskStatus.Cancelled)
+            .Where(t => t.AssignedToUserId == housekeeperId)
             .OrderBy(t => t.Deadline)
             .ToListAsync();
 
