@@ -15,7 +15,9 @@ public class UserProfile : BaseEntity
     public Guid UserId { get; private set; }
     public User User { get; private set; } = default!;
 
-    
+    public string? Gender { get; private set; }
+    public string? Address { get; private set; }
+    public string? ProfilePicture { get; private set; } // base64 or URL
 
     private UserProfile() { }
 
@@ -26,7 +28,7 @@ public class UserProfile : BaseEntity
         LastName = lastName;
         Phone = phone;
     }
-    public void Update(string firstName, string lastName, string phone)
+    public void Update(string firstName, string lastName, string phone, string? gender, string? address, string? profilePicture)
     {
         if (string.IsNullOrWhiteSpace(phone))
             throw new ArgumentException("Phone number cannot be empty");
@@ -34,6 +36,11 @@ public class UserProfile : BaseEntity
         FirstName = firstName;
         LastName = lastName;
         Phone = phone;
+        Gender = gender;
+        Address = address;
+        if (profilePicture != null)
+            ProfilePicture = profilePicture;
+
     }
 
 }

@@ -95,4 +95,13 @@ public class UserController : ControllerBase
         await _userService.UpdateProfileAsync(userId, request);
         return NoContent();
     }
+
+    [Authorize]
+    [HttpPut("me/password")]
+    public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordRequest request)
+    {
+        var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+        await _userService.ChangePasswordAsync(userId, request);
+        return NoContent();
+}
 }

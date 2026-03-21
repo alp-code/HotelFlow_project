@@ -59,4 +59,12 @@ public class User : BaseEntity
         Role = role;
     }
 
+    public void ChangePassword(string newPasswordHash)
+    {
+        if (string.IsNullOrWhiteSpace(newPasswordHash))
+            throw new ArgumentException("Password cannot be empty");
+        PasswordHash = newPasswordHash;
+    }
+
+
 }

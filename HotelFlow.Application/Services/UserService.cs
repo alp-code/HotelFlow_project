@@ -152,7 +152,11 @@ public class UserService : IUserService
             {
                 FirstName = user.Profile.FirstName,
                 LastName = user.Profile.LastName,
-                Phone = user.Profile.Phone
+                Phone = user.Profile.Phone,
+                Gender = user.Profile.Gender,
+                Address = user.Profile.Address,
+                ProfilePicture = user.Profile.ProfilePicture
+
             } : null
         };
     }
@@ -169,8 +173,22 @@ public class UserService : IUserService
         if (user.Profile == null)
             user.CreateProfile(request.FirstName, request.LastName, request.Phone);
         else
-            user.Profile.Update(request.FirstName, request.LastName, request.Phone);
+            user.Profile.Update(request.FirstName, request.LastName, request.Phone, request.Gender, request.Address, request.ProfilePicture);
 
+        await _context.SaveChangesAsync();
+    }
+
+    public async Task ChangePasswordAsync(Guid userId, ChangePasswordRequest request)
+    {
+        var user = await _context.Users.FindAsync(userId);
+        if (user == null)
+            throw new NotFoundException("User not found");
+
+        if (!BCrypt.Net.BCrypt.Verify(request.CurrentPassword, user.PasswordHash))
+            throw new BadRequestException("Current password is incorrect");
+
+        var newHash = BCrypt.Net.BCrypt.HashPassword(request.NewPassword);
+        user.ChangePassword(newHash);
         await _context.SaveChangesAsync();
     }
 

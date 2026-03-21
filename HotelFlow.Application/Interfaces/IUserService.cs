@@ -12,4 +12,6 @@ public interface IUserService
     Task<IEnumerable<UserResponse>> GetAllActiveUsersAsync();
     Task<UserResponse> GetProfileAsync(Guid userId);
     Task UpdateProfileAsync(Guid userId, UpdateProfileRequest request);
+    Task ChangePasswordAsync(Guid userId, ChangePasswordRequest request);
+
 }
