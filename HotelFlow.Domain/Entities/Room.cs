@@ -59,7 +59,7 @@ public class Room : BaseEntity
 
     public void MarkAsCleaned()
     {
-        if (Status != RoomStatus.NeedsCleaning && Status != RoomStatus.OutOfService)
+        if (Status != RoomStatus.NeedsCleaning && Status != RoomStatus.OutOfService && Status != RoomStatus.Cleaning)
             throw new Exception($"Cannot clean room with status: {Status}");
 
         Status = RoomStatus.Available;

@@ -252,15 +252,13 @@ public class HousekeepingService : IHousekeepingService
         {
             case HousekeepingTaskType.Cleaning:
                 // Ako je soba za čišćenje, označi je kao dostupnu
-                if (task.Room.Status == RoomStatus.OutOfService)
-                {
-                    task.Room.MarkAsCleaned();
-                }
-                if (task.Room.Status == RoomStatus.NeedsCleaning)
-                {
-                    task.Room.MarkAsCleaned();
-                }
-                break;
+            if (task.Room.Status == RoomStatus.OutOfService ||
+                task.Room.Status == RoomStatus.NeedsCleaning ||
+                task.Room.Status == RoomStatus.Cleaning)  // ← add this
+            {
+                task.Room.MarkAsCleaned();
+            }
+            break;
 
             case HousekeepingTaskType.Maintenance:
                 // Nakon održavanja, soba se vraća u stanje za upotrebu
