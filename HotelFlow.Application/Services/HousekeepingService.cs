@@ -244,72 +244,30 @@ public class HousekeepingService : IHousekeepingService
         return await MapToResponseAsync(task);
     }
 
-    private void UpdateRoomStatusBasedOnTaskType(HousekeepingTask task)
-    {
-        if (task.Room == null) return;
+    private void UpdateRoomStatusBasedOnTaskType(HousekeepingTask task){
+    if (task.Room == null) return;
 
-        switch (task.Type)
-        {
-            case HousekeepingTaskType.Cleaning:
-                // Ako je soba za čišćenje, označi je kao dostupnu
-            if (task.Room.Status == RoomStatus.OutOfService ||
-                task.Room.Status == RoomStatus.NeedsCleaning ||
-                task.Room.Status == RoomStatus.Cleaning)  // ← add this
-            {
+    bool shouldMarkAvailable =
+        task.Room.Status == RoomStatus.NeedsCleaning ||
+        task.Room.Status == RoomStatus.OutOfService ||
+        task.Room.Status == RoomStatus.Cleaning;
+
+    switch (task.Type){
+        case HousekeepingTaskType.Cleaning:
+        case HousekeepingTaskType.Maintenance:
+        case HousekeepingTaskType.Restocking:
+        case HousekeepingTaskType.Setup:
+            if (shouldMarkAvailable)
                 task.Room.MarkAsCleaned();
-            }
             break;
 
-            case HousekeepingTaskType.Maintenance:
-                // Nakon održavanja, soba se vraća u stanje za upotrebu
-                if (task.Room.Status == RoomStatus.OutOfService)
-                {
-                    task.Room.MarkAsCleaned();
-                }
-                else if (task.Room.Status == RoomStatus.NeedsCleaning)
-                {
-                    // Ako je potrebno čišćenje nakon održavanja
-                    task.Room.MarkAsCleaned();
-                }
-                break;
+        case HousekeepingTaskType.Inspection:
+            // Inspection is handled separately via CompleteInspectionTaskAsync
+            break;
 
-            case HousekeepingTaskType.Inspection:
-                // Nakon održavanja, soba se vraća u stanje za upotrebu
-                if (task.Room.Status == RoomStatus.NeedsCleaning)
-                {
-                    // Ako je potrebno čišćenje nakon održavanja
-                    task.Room.MarkAsCleaned();
-                }
-                break;
-
-            case HousekeepingTaskType.Restocking:
-                // Nakon dopunjavanja robe, soba je spremna za upotrebu
-                if (task.Room.Status == RoomStatus.OutOfService)
-                {
-                    task.Room.MarkAsCleaned();
-                }
-                if (task.Room.Status == RoomStatus.NeedsCleaning)
-                {
-                    task.Room.MarkAsCleaned();
-                }
-                break;
-
-            case HousekeepingTaskType.Setup:
-                // Nakon postavljanja (npr. za specijalne događaje), soba je spremna
-                if (task.Room.Status == RoomStatus.OutOfService)
-                {
-                    task.Room.MarkAsCleaned();
-                }
-                if (task.Room.Status == RoomStatus.NeedsCleaning)
-                {
-                    task.Room.MarkAsCleaned();
-                }
-                break;
-
-            default:
-                // Za nepoznate tipove zadataka, možda želite da logujete upozorenje
-                _logger.LogWarning($"Unknown task type: {task.Type} for room {task.Room.RoomNumber}");
-                break;
+        default:
+            _logger.LogWarning($"Unknown task type: {task.Type} for room {task.Room.RoomNumber}");
+            break;
         }
     }
 

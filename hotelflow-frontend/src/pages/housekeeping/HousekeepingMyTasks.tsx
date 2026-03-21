@@ -4,6 +4,7 @@ import { HousekeepingTask } from '../../types';
 import { ListTodo, Play, CheckCircle2, ChevronDown } from 'lucide-react';
 import { PageHeader, PageSpinner, TaskStatusBadge, TaskTypeBadge, EmptyState, ErrorAlert, Modal, FormField } from '../../components/ui';
 import { format } from 'date-fns';
+import api from '../../api/client';
 
 export default function HousekeepingMyTasks() {
   const [tasks, setTasks] = useState<HousekeepingTask[]>([]);
@@ -13,6 +14,9 @@ export default function HousekeepingMyTasks() {
   const [completeModal, setCompleteModal] = useState(false);
   const [completeTarget, setCompleteTarget] = useState<HousekeepingTask | null>(null);
   const [notes, setNotes] = useState('');
+  const [inspectionOpen, setInspectionOpen] = useState(false);
+  const [inspectionForm, setInspectionForm] = useState({ roomStatus: 'Available', nextTaskType: '', notes: '' });
+
 
   const load = () => {
     setLoading(true);
@@ -95,7 +99,14 @@ export default function HousekeepingMyTasks() {
                           {task.status === 'InProgress' && (
                             <button
                               className="btn-primary py-1.5 px-3 text-xs flex items-center gap-1.5"
-                              onClick={() => { setCompleteTarget(task); setCompleteModal(true); }}
+                              onClick={() => { 
+                                setCompleteTarget(task);
+                                if (task.taskType === 'Inspection') {
+                                  setInspectionOpen(true);
+                                } else {
+                                  setCompleteModal(true);
+                                }
+                              }}
                             >
                               <CheckCircle2 size={12} /> Complete
                             </button>
@@ -150,6 +161,54 @@ export default function HousekeepingMyTasks() {
           <button className="btn-primary flex-1" onClick={handleComplete} disabled={actionId === completeTarget?.id}>
             {actionId === completeTarget?.id ? 'Completing…' : 'Mark Complete'}
           </button>
+        </div>
+      </Modal>
+
+      <Modal title="Complete Inspection" open={inspectionOpen} onClose={() => setInspectionOpen(false)}>
+        <div className="space-y-4">
+          <FormField label="Room status after inspection">
+            <select className="input-field" value={inspectionForm.roomStatus}
+              onChange={(e) => setInspectionForm((f) => ({ ...f, roomStatus: e.target.value }))}>
+              <option value="Available">Available</option>
+              <option value="NeedsCleaning">Needs Cleaning</option>
+              <option value="OutOfService">Out of Service</option>
+            </select>
+          </FormField>
+          <FormField label="Create follow-up task (optional)">
+            <select className="input-field" value={inspectionForm.nextTaskType}
+              onChange={(e) => setInspectionForm((f) => ({ ...f, nextTaskType: e.target.value }))}>
+              <option value="">None</option>
+              <option value="Cleaning">Cleaning</option>
+              <option value="Maintenance">Maintenance</option>
+              <option value="Restocking">Restocking</option>
+              <option value="Setup">Setup</option>
+            </select>
+          </FormField>
+          <FormField label="Notes (optional)">
+            <textarea className="input-field resize-none" rows={2}
+              value={inspectionForm.notes}
+              onChange={(e) => setInspectionForm((f) => ({ ...f, notes: e.target.value }))} />
+          </FormField>
+          <div className="flex gap-3 pt-2">
+            <button className="btn-secondary flex-1" onClick={() => setInspectionOpen(false)}>Cancel</button>
+            <button className="btn-primary flex-1" onClick={async () => {
+              if (!completeTarget) return;
+              try {
+                await api.post(`/api/housekeeping/tasks/${completeTarget.id}/complete-inspection`, {
+                  roomStatus: inspectionForm.roomStatus,
+                  nextTaskType: inspectionForm.nextTaskType || null,
+                  notes: inspectionForm.notes || null,
+                });
+                setInspectionOpen(false);
+                load();
+              } catch (err: unknown) {
+                const e = err as { response?: { data?: { message?: string } } };
+                setError(e.response?.data?.message ?? 'Failed to complete inspection.');
+              }
+            }}>
+              Complete Inspection
+            </button>
+          </div>
         </div>
       </Modal>
     </div>
