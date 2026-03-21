@@ -17,6 +17,8 @@ const staffLinks = [
   { to: '/staff/checkouts', label: "Today's Checkouts", icon: CheckSquare },
   { to: '/staff/rooms', label: 'Rooms & Types', icon: BedDouble },
   { to: '/staff/users', label: 'Users', icon: Users },
+  { to: '/housekeeping/all', label: 'All Tasks', icon: ClipboardList },
+  { to: '/housekeeping/available', label: 'Available Tasks', icon: ListTodo },
 ];
 
 const housekeepingLinks = [

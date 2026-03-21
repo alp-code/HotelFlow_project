@@ -138,8 +138,8 @@ export interface Housekeeper {
 }
 
 export interface CreateHousekeepingTaskRequest {
-  roomId: string;
-  type: number;
+  roomNumber: string;
+  taskType: string;
   description: string;
   deadline: string;
   assignedToUserId?: string;
