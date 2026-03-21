@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using HotelFlow.Application.DTOs.Requests.Auth;
 
 namespace HotelFlow.API.Controllers;
 
@@ -75,5 +76,23 @@ public class UserController : ControllerBase
     {
         var users = await _userService.GetAllActiveUsersAsync();
         return Ok(users);
+    }
+        
+    [Authorize]
+    [HttpGet("me")]
+    public async Task<IActionResult> GetProfile()
+    {
+        var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+        var profile = await _userService.GetProfileAsync(userId);
+        return Ok(profile);
+    }
+
+    [Authorize]
+    [HttpPut("me")]
+    public async Task<IActionResult> UpdateProfile([FromBody] UpdateProfileRequest request)
+    {
+        var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+        await _userService.UpdateProfileAsync(userId, request);
+        return NoContent();
     }
 }

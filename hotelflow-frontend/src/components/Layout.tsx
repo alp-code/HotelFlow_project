@@ -2,13 +2,15 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import {
   LayoutDashboard, CalendarDays, BedDouble, ClipboardList,
-  Users, LogOut, Hotel, Wrench, CheckSquare, ListTodo,
+  Users, LogOut, Hotel, Wrench, CheckSquare, ListTodo, UserCircle,
 } from 'lucide-react';
+
 
 const guestLinks = [
   { to: '/guest', label: 'Dashboard', icon: LayoutDashboard, end: true },
   { to: '/guest/rooms', label: 'Browse Rooms', icon: BedDouble },
   { to: '/guest/reservations', label: 'My Reservations', icon: CalendarDays },
+  { to: '/guest/profile', label: 'My Profile', icon: UserCircle },
 ];
 
 const staffLinks = [
@@ -18,6 +20,7 @@ const staffLinks = [
   { to: '/staff/rooms', label: 'Rooms & Types', icon: BedDouble },
   { to: '/staff/users', label: 'Users', icon: Users },
   { to: '/housekeeping/all', label: 'All Tasks', icon: ClipboardList },
+  { to: '/staff/profile', label: 'My Profile', icon: UserCircle },
 ];
 
 const housekeepingLinks = [
@@ -25,6 +28,7 @@ const housekeepingLinks = [
   { to: '/housekeeping/my-tasks', label: 'My Tasks', icon: ListTodo },
   { to: '/housekeeping/available', label: 'Available Tasks', icon: ClipboardList },
   { to: '/housekeeping/all', label: 'All Tasks', icon: Wrench },
+  { to: '/housekeeping/profile', label: 'My Profile', icon: UserCircle },
 ];
 
 export default function Layout({ children }: { children: React.ReactNode }) {

@@ -10,4 +10,6 @@ public interface IUserService
     Task RestoreUserAsync(Guid userId);       // admin
     Task<Guid> GetDeletedUserIdByEmailAsync(string email);
     Task<IEnumerable<UserResponse>> GetAllActiveUsersAsync();
+    Task<UserResponse> GetProfileAsync(Guid userId);
+    Task UpdateProfileAsync(Guid userId, UpdateProfileRequest request);
 }

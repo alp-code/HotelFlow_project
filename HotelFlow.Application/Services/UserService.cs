@@ -3,7 +3,7 @@ using HotelFlow.Domain.Enums;
 using HotelFlow.Domain.Exceptions;
 using HotelFlow.Infrastructure.Data.DbContext;
 using Microsoft.EntityFrameworkCore;
-
+using HotelFlow.Application.DTOs.Requests.Auth;
 namespace HotelFlow.Application.Services;
 
 public class UserService : IUserService
@@ -131,6 +131,47 @@ public class UserService : IUserService
                 } : null
             })
             .ToListAsync();
+    }
+
+    public async Task<UserResponse> GetProfileAsync(Guid userId)
+    {
+        var user = await _context.Users
+            .Include(u => u.Profile)
+            .FirstOrDefaultAsync(u => u.Id == userId);
+
+        if (user == null)
+            throw new NotFoundException("User not found");
+
+        return new UserResponse
+        {
+            Id = user.Id,
+            Email = user.Email,
+            Role = user.Role.ToString(),
+            CreatedAt = user.CreatedAt,
+            Profile = user.Profile != null ? new UserProfileResponse
+            {
+                FirstName = user.Profile.FirstName,
+                LastName = user.Profile.LastName,
+                Phone = user.Profile.Phone
+            } : null
+        };
+    }
+
+    public async Task UpdateProfileAsync(Guid userId, UpdateProfileRequest request)
+    {
+        var user = await _context.Users
+            .Include(u => u.Profile)
+            .FirstOrDefaultAsync(u => u.Id == userId);
+
+        if (user == null)
+            throw new NotFoundException("User not found");
+
+        if (user.Profile == null)
+            user.CreateProfile(request.FirstName, request.LastName, request.Phone);
+        else
+            user.Profile.Update(request.FirstName, request.LastName, request.Phone);
+
+        await _context.SaveChangesAsync();
     }
 
 }

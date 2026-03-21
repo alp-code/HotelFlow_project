@@ -25,6 +25,10 @@ import HousekeepingMyTasks from './pages/housekeeping/HousekeepingMyTasks';
 import HousekeepingAvailable from './pages/housekeeping/HousekeepingAvailable';
 import HousekeepingAllTasks from './pages/housekeeping/HousekeepingAllTasks';
 
+// Profile Page
+import ProfilePage from './pages/profile/ProfilePage';
+
+
 function RootRedirect() {
   const { isAuthenticated, role, loading } = useAuth();
   if (loading) return null;
@@ -60,6 +64,12 @@ function App() {
               <Layout><GuestReservations /></Layout>
             </ProtectedRoute>
           } />
+          <Route path="/guest/profile" element={
+            <ProtectedRoute allowedRoles={['Guest']}>
+              <Layout><ProfilePage /></Layout>
+            </ProtectedRoute>
+          } />
+
 
           {/* Staff */}
           <Route path="/staff" element={
@@ -87,6 +97,11 @@ function App() {
               <Layout><StaffUsers /></Layout>
             </ProtectedRoute>
           } />
+          <Route path="/staff/profile" element={
+            <ProtectedRoute allowedRoles={['Staff']}>
+              <Layout><ProfilePage /></Layout>
+            </ProtectedRoute>
+          } />
 
           {/* Housekeeping */}
           <Route path="/housekeeping" element={
@@ -107,6 +122,11 @@ function App() {
           <Route path="/housekeeping/all" element={
             <ProtectedRoute allowedRoles={['Housekeeping', 'Staff']}>
               <Layout><HousekeepingAllTasks /></Layout>
+            </ProtectedRoute>
+          } />
+          <Route path="/housekeeping/profile" element={
+            <ProtectedRoute allowedRoles={['Housekeeping']}>
+              <Layout><ProfilePage /></Layout>
             </ProtectedRoute>
           } />
 
