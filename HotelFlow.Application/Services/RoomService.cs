@@ -41,6 +41,12 @@ public class RoomService : IRoomService
         if (!roomTypeExists)
             throw new NotFoundException("Room type not found");
 
+        var roomExists = await _context.Rooms
+            .AnyAsync(r => r.RoomNumber == request.RoomNumber);
+
+        if (roomExists)
+            throw new BadRequestException($"Room number {request.RoomNumber} already exists");
+
         var room = new Room(
             request.RoomNumber,
             request.RoomTypeId
