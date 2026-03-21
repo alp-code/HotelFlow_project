@@ -6,6 +6,7 @@ import { StatCard, PageSpinner, ReservationStatusBadge, PageHeader, ErrorAlert }
 import { format } from 'date-fns';
 import { Link } from 'react-router-dom';
 
+
 export default function StaffDashboard() {
   const [all, setAll] = useState<Reservation[]>([]);
   const [checkouts, setCheckouts] = useState<Reservation[]>([]);
@@ -18,7 +19,7 @@ export default function StaffDashboard() {
   const load = async () => {
     setLoading(true);
     const [a, c] = await Promise.all([
-      reservationsApi.getAll(today, today).catch(() => [] as Reservation[]),
+      reservationsApi.getAll(today).catch(() => [] as Reservation[]),
       reservationsApi.getTodayCheckouts().catch(() => [] as Reservation[]),
     ]);
     setAll(a);
@@ -58,7 +59,7 @@ export default function StaffDashboard() {
 
   if (loading) return <PageSpinner />;
 
-  const confirmed = all.filter((r) => r.status === 'Confirmed');
+  const confirmed = all.filter((r) => r.status === 'Confirmed' && new Date(r.checkInDate).toDateString() === new Date().toDateString());
   const checkedIn = all.filter((r) => r.status === 'CheckedIn');
 
   return (
@@ -180,6 +181,60 @@ export default function StaffDashboard() {
                     </td>
                   </tr>
                 ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </div>
+
+            {/* Currently Checked In */}
+      <div className="card mt-6">
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="font-display text-hotel-navy text-lg">Currently in the Hotel</h2>
+          <span className="badge bg-emerald-100 text-emerald-700">{checkedIn.length} guest{checkedIn.length !== 1 ? 's' : ''}</span>
+        </div>
+        {checkedIn.length === 0 ? (
+          <p className="text-hotel-muted text-sm font-body text-center py-6">No guests currently checked in.</p>
+        ) : (
+          <div className="overflow-x-auto">
+            <table className="w-full">
+              <thead>
+                <tr>
+                  {['Guest', 'Room', 'Check-in', 'Check-out', 'Nights Left', 'Actions'].map((h) => (
+                    <th key={h} className="table-header text-left">{h}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {checkedIn.map((r) => {
+                  const nightsLeft = Math.ceil((new Date(r.checkOutDate).getTime() - new Date().getTime()) / 86400000);
+                  return (
+                    <tr key={r.id} className="hover:bg-hotel-cream/40 transition-colors">
+                      <td className="table-cell">
+                        <p className="font-medium text-hotel-navy">{r.guestName}</p>
+                        <p className="text-hotel-muted text-xs">{r.guestEmail}</p>
+                      </td>
+                      <td className="table-cell font-medium text-hotel-navy">{r.roomNumber}</td>
+                      <td className="table-cell">{format(new Date(r.checkInDate), 'MMM d')}</td>
+                      <td className="table-cell">{format(new Date(r.checkOutDate), 'MMM d')}</td>
+                      <td className="table-cell">
+                        <span className={`badge ${nightsLeft <= 1 ? 'bg-amber-100 text-amber-700' : 'bg-emerald-100 text-emerald-700'}`}>
+                          {nightsLeft <= 0 ? 'Due today' : `${nightsLeft} night${nightsLeft !== 1 ? 's' : ''}`}
+                        </span>
+                      </td>
+                      <td className="table-cell">
+                        <button
+                          className="btn-secondary py-1.5 px-3 text-xs flex items-center gap-1"
+                          onClick={() => doCheckOut(r.id)}
+                          disabled={actionLoading === r.id + '_out'}
+                        >
+                          <LogOut size={12} />
+                          {actionLoading === r.id + '_out' ? '…' : 'Check Out'}
+                        </button>
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </div>
