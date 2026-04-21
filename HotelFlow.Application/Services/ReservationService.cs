@@ -63,6 +63,18 @@ public class ReservationService : IReservationService
             if (room.Status == RoomStatus.OutOfService)
                 throw new BadRequestException($"Room {request.RoomNumber} is out of service");
 
+            if (room.Status == RoomStatus.Cleaning)
+                throw new BadRequestException($"Room {request.RoomNumber} is currently being cleaned and cannot be reserved");
+
+            var hasActiveHousekeepingTask = await _context.HousekeepingTasks
+                .AnyAsync(t =>
+                    t.RoomId == room.Id &&
+                    (t.Status == HousekeepingTaskStatus.Pending ||
+                     t.Status == HousekeepingTaskStatus.InProgress));
+
+            if (hasActiveHousekeepingTask)
+                throw new BadRequestException($"Room {request.RoomNumber} has an active housekeeping task and cannot be reserved");
+
             // PROVERA PREKLAPANJA REZERVACIJA - SA LOCK-OM
             var overlappingReservationExists = await _context.Reservations
                 .FromSqlInterpolated($@"
@@ -229,7 +241,12 @@ public class ReservationService : IReservationService
             .Where(r =>
                 r.RoomTypeId == roomType.Id &&
                 r.Status != RoomStatus.OutOfService &&
+                r.Status != RoomStatus.Cleaning &&
                 r.RoomType.MaxGuests >= guests)
+            .Where(r => !_context.HousekeepingTasks.Any(t =>
+                t.RoomId == r.Id &&
+                (t.Status == HousekeepingTaskStatus.Pending ||
+                 t.Status == HousekeepingTaskStatus.InProgress)))
             .Where(r => !_context.Reservations.Any(res =>
                 res.RoomId == r.Id &&
                 res.Status != ReservationStatus.Cancelled &&
